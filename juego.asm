@@ -26,7 +26,7 @@ section .data
     indice_x_viejo dq 0
     indice_y_viejo dq 0
     
-    cantOcasComidas dd 9
+    cantOcasComidas dd 0
 
 section .text
     global _start
