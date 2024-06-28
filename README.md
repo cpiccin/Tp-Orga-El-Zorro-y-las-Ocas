@@ -14,7 +14,7 @@ El otro jugador controla las **Ocas**. <br>
 ### Objetivos:
 
 Zorro: 
-- capturar 12 ocas <br>
+- capturar 12 ocas 
 
 Ocas:
 - acorralar al Zorro de tal manera que no pueda moverse, o que
