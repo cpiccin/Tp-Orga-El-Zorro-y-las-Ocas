@@ -13,10 +13,10 @@ El otro jugador controla las **Ocas**. <br>
 
 ### Objetivos:
 
-Zorro: 
+**Zorro**: 
 - capturar 12 ocas 
 
-Ocas:
+**Ocas**:
 - acorralar al Zorro de tal manera que no pueda moverse, o que
 - 6 ocas llegan a la parte inferior del tablero
 
