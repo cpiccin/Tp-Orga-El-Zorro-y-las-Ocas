@@ -97,7 +97,8 @@ section .data
     
     hayOcas db "N", 0
     indiceZorro dq 0
-
+    comioOca dq 0 
+    
     ; uso en mostrarTableroConFormato
     lineaSuperior   db "   | 1 | 2 | 3 | 4 | 5 | 6 | 7 |", 0
     formatoFila     db " %d |", 0 ; Para imprimir el número de fila

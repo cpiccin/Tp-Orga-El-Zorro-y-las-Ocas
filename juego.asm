@@ -28,6 +28,9 @@ section .data
     
     cantOcasComidas dd 0
 
+
+
+section .bss
 section .text
     global _start
 
@@ -300,14 +303,14 @@ calcularIndice:
     mov r10, qword[indice_y_viejo]
     add r10, qword[indice_x_viejo]
     add rbx, r10
-    mov r8, rbx
+    mov r8, rbx     ; guardo la posición final vieja del zorro en r8 / posición donde va a estar oca si es que hay
 
     mov rbx, qword[indice_y_nuevo]
     imul rbx, 7
     mov r11, qword[indice_y_nuevo]
     add r11, qword[indice_x_nuevo]
     add rbx, r11
-    mov r9, rbx
+    mov r9, rbx     ; guardo la posición final nueva del zorro en r9
 
 validacionDeTablero:
     ; mov rdi, validacionDeTableromsj
@@ -324,9 +327,15 @@ validacionDeTablero:
     cmp rbx, 0
     jl movimientoZorro
 
+
+; validacionEspacios:
+
 ;-------------------------
+
+
+
 validarPosicionZorro:
-    ; obtengo la direccion de memoria de la posicion que se selecciono
+    ; obtengo la direccion de memoria de la posicion que se seleccionó
     ; mExtraerCaracter indice_y_nuevo, indice_x_nuevo
 
     mov al, byte[matrizPrincipal + r9]
@@ -350,7 +359,7 @@ msgMoverZorro:
     jmp movimientoZorro
 
 validarComerZorro:
-    cmp byte[hayOcas], "S"
+    cmp byte[hayOcas], "S" ; para saber 
     je msgMoverZorro
 
     cmp byte[hayOcas], "N"    
@@ -373,19 +382,19 @@ guardarDatosOca:
     jmp obtenerNuevaPosicion
 
 borrarZorro:
-    mov rdx, qword[indiceZorro]  ; posición vieja del zorro
+    mov rdx, qword[indiceZorro]  ; posición original del zorro
     mov byte[matrizPrincipal + rdx], "-"
     jmp reseteo
 
 cambiarPosicion:
-    mov byte[matrizPrincipal + r8], '-'
+    mov byte[matrizPrincipal + r8], '-' ; posición vieja del zorro / posición que se pisa de la oca
 
-    mov byte[matrizPrincipal + r9], 'X'
+    mov byte[matrizPrincipal + r9], 'X' ; posición nueva del zorro
     
-    mov byte [turno], 0 ; cambio el turno
-
     cmp byte[hayOcas], "S"
     je borrarZorro
+
+    mov byte [turno], 0 ; cambio el turno
 
 reseteo:
     mov byte[hayOcas], "N"
