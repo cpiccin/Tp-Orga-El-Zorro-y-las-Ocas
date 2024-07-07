@@ -36,3 +36,8 @@ El otro jugador controla las **Ocas**. <br>
 El juego termina automáticamente cuando:
 - El Zorro captura 12 ocas.
 - El Zorro no puede realizar ningún movimiento válido porque quedo acorralado o 6 ocas llegaron a la parte mas inferior del tablero.
+
+
+
+#### Ensamblar y correr con 
+```$ nasm juego.asm -felf64 && nasm validacionPartidaGanada.asm -felf64 && nasm macros_y_variables.asm -felf64 && nasm mostrarTableroConFormato.asm -felf64 && gcc *.o -no-pie && ./a.out```
