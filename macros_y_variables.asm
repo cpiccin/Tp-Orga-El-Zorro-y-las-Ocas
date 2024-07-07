@@ -98,6 +98,10 @@ section .data
     hayOcas db "N", 0
     indiceZorro dq 0
     comioOca dq 0 
+
+    ; uso en validacionPartidaGanada
+    deltaY dd 0
+    deltaX dd 0
     
     ; uso en mostrarTableroConFormato
     lineaSuperior   db "   | 1 | 2 | 3 | 4 | 5 | 6 | 7 |", 0
@@ -107,6 +111,7 @@ section .data
     saltoDeLinea    dd 10
     columna         dd 1
     fila            dd 1
+
 
 section .bss
     moverZorroA resb 100

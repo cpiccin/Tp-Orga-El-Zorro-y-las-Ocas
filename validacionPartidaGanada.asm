@@ -26,14 +26,40 @@ validarGanoOcas:
     ; tengo que chequear si las ocas encerraron al zorro o si hay 6 ocas en la parte inferior del tablero
     mov byte [sePuedeMover], 'N'
     ; para ver si el zorro esta encerrado en todos los sentidos de movimiento
-    call chequeoArriba
-    call chequeoAbajo
-    call chequeoIzquierda
-    call chequeoDerecha
-    call chequeoDiagIzqArr
-    call chequeoDiagIzqAbj
-    call chequeoDiagDerArr
-    call chequeoDiagDerAbj
+
+    ; chequeo arriba
+    mov dword [deltaY], -1
+    mov dword [deltaX], 0
+    call chequeoMovimiento
+    ; chequeo abajo
+    mov dword [deltaY], 1
+    mov dword [deltaX], 0
+    call chequeoMovimiento
+    ; chequeo izquierda
+    mov dword [deltaY], 0
+    mov dword [deltaX], -1 
+    call chequeoMovimiento
+    ; chequeo derecha
+    mov dword [deltaY], 0
+    mov dword [deltaX], 1
+    call chequeoMovimiento
+    ; chequeo diagonal izquierda arriba
+    mov dword [deltaY], -1
+    mov dword [deltaX], -1
+    call chequeoMovimiento
+    ; chequeo diagonal izquierda abajo
+    mov dword [deltaY], 1
+    mov dword [deltaX], -1
+    call chequeoMovimiento
+    ; chequeo diagonal derecha arriba
+    mov dword [deltaY], -1
+    mov dword [deltaX], 1
+    call chequeoMovimiento
+    ; chequeo diagonal derecha abajo
+    mov dword [deltaY], 1
+    mov dword [deltaX], 1
+    call chequeoMovimiento
+
     ; para chequear si las 6 ocas llegaron a la parte inferior del tablero.
     ; el zorro puede no estar encerrado pero si 6 ocas llegan abajo ya no se pueden mover y ganan
     call chequearLlegaron6Abajo ; puede modificar el valor de sePuedeMover
@@ -41,126 +67,27 @@ validarGanoOcas:
     jne mensajeGanoOcas
     ret ; si llega hasta aca es que todavia no ganaron y sigue el juego
 
-chequeoArriba:
+chequeoMovimiento:
     call ajustarIndices
 
-    dec dword [auxY]
+    mov rax, [deltaY]
+    add [auxY], rax 
+    mov rax, [deltaX]
+    add [auxX], rax
     mExtraerCaracter auxY, auxX
     mov [valor1], al
 
-    dec dword [auxY]
+    mov rax, [deltaY]
+    add [auxY], rax 
+    mov rax, [deltaX]
+    add [auxX], rax
     mExtraerCaracter auxY, auxX
     mov [valor2], al
 
     call chequeoIgualdad
 
     ret
-chequeoAbajo: 
-    call ajustarIndices
 
-    inc dword [auxY]
-    mExtraerCaracter auxY, auxX
-    mov [valor1], al
-
-    inc dword [auxY]
-    mExtraerCaracter auxY, auxX
-    mov [valor2], al
-
-    call chequeoIgualdad
-
-    ret 
-chequeoIzquierda:
-    call ajustarIndices
-
-    dec dword [auxX]
-    mExtraerCaracter auxY, auxX
-    mov [valor1], al
-
-    dec dword [auxX]
-    mExtraerCaracter auxY, auxX
-    mov [valor2], al
-
-    call chequeoIgualdad
-
-    ret 
-chequeoDerecha:
-    call ajustarIndices
-
-    inc dword [auxX]
-    mExtraerCaracter auxY, auxX
-    mov [valor1], al
-
-    inc dword [auxX]
-    mExtraerCaracter auxY, auxX
-    mov [valor2], al
-
-    call chequeoIgualdad
-
-    ret
-chequeoDiagIzqArr:
-    call ajustarIndices
-
-    dec dword [auxY]
-    dec dword [auxX]
-    mExtraerCaracter auxY, auxX
-    mov [valor1], al
-
-    dec dword [auxY]
-    dec dword [auxX]
-    mExtraerCaracter auxY, auxX
-    mov [valor2], al
-
-    call chequeoIgualdad
-
-    ret
-chequeoDiagIzqAbj:
-    call ajustarIndices
-
-    inc dword [auxY]
-    dec dword [auxX]
-    mExtraerCaracter auxY, auxX
-    mov [valor1], al
-
-    inc dword [auxY]
-    dec dword [auxX]
-    mExtraerCaracter auxY, auxX
-    mov [valor2], al
-
-    call chequeoIgualdad
-
-    ret
-chequeoDiagDerArr:
-    call ajustarIndices
-
-    dec dword [auxY]
-    inc dword [auxX]
-    mExtraerCaracter auxY, auxX
-    mov [valor1], al
-
-    dec dword [auxY]
-    inc dword [auxX]
-    mExtraerCaracter auxY, auxX
-    mov [valor2], al
-
-    call chequeoIgualdad
-
-    ret
-chequeoDiagDerAbj:
-    call ajustarIndices
-
-    inc dword [auxY]
-    inc dword [auxX]
-    mExtraerCaracter auxY, auxX
-    mov [valor1], al
-
-    inc dword [auxY]
-    inc dword [auxX]
-    mExtraerCaracter auxY, auxX
-    mov [valor2], al
-
-    call chequeoIgualdad
-
-    ret
 mensajeGanoOcas:
     call mostrarTableroConFormato 
     mPuts msgGanoOca
