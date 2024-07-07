@@ -25,7 +25,7 @@ El otro jugador controla las **Ocas**. <br>
 **Zorro**: 
 - Puede moverse una casilla a la vez en cualquier dirección: hacia adelante, hacia atrás, en diagonales o a los costados.
 - Para capturar una oca, debe saltar sobre ella hacia una casilla vacía.
-- Puede continuar moviéndose para capturar más ocas si hay disponibles.
+- Si el zorro capturo una oca puede realizar otro movimiento adicional, cuealquier otro tipo de movimiento.
 
 **Ocas**:
 - Pueden moverse una casilla a la vez hacia adelante o a los costados.
